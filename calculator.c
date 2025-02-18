@@ -8,6 +8,7 @@
  * 2025/02/09 Y.Oshima 新規作成
  * 2025/02/16 Y.Oshima 変更: 機能追加
  * 2025/02/17 Y.Oshima 変更: 機能追加
+ * 2025/02/18 Y.Oshima 変更: 機能追加
  ************************************************************/
 #include <stdio.h>
 #include <string.h>
@@ -20,6 +21,9 @@ int main(void)
      int amount = 0;
      int mod = 0;
      char trigger[10] = "";
+     int remain[10] = {0};
+     static int i = 0;
+
      do
      { 
     printf("演算の種類を選んでください(1:加算 2:減算 3:乗算 4:除算)\n");
@@ -67,6 +71,24 @@ int main(void)
         break;
 
      }
+     if(i < 10)
+     {
+         remain[i] = amount;
+         printf("計算結果を保存しました: %d\n", remain[i]);
+         i++;
+     }
+       else
+       {
+          printf("履歴最大容量に達しました。新しい履歴を保斬できません\n");
+       }
+     
+       printf("---- 計算履歴 ----\n");
+        for (int j = 0; j < i; j++)
+        {
+            printf("[%d] %d\n", j + 1, remain[j]);
+        }
+        printf("------------------\n");
+
      printf("終了する場合は「qt」と入力してください\n");
      scanf("%s",trigger);
     }while(strcmp(trigger,"qt") != 0);
