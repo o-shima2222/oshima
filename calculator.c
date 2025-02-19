@@ -12,6 +12,9 @@
  ************************************************************/
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
+
+#define REMAIN_MAX 10
 
 int main(void)
 {
@@ -22,7 +25,7 @@ int main(void)
      int mod = 0;
      char trigger[10] = "";
      int remain[10] = {0};
-     static int i = 0;
+     int i = 0;
 
      do
      { 
@@ -66,12 +69,18 @@ int main(void)
         }
         break;
 
+        case 5:
+        printf("累乗計算を行います\n");
+        amount = pow(x,y);
+        printf("%d\n",amount);
+        break;
+
         default:
-        printf("無効な選択ですです\n");
+        printf("無効な選択です\n");
         break;
 
      }
-     if(i < 10)
+     if(i < REMAIN_MAX)
      {
          remain[i] = amount;
          printf("計算結果を保存しました: %d\n", remain[i]);
