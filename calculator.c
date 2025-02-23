@@ -20,7 +20,7 @@
 
 int main(void)
 {
-     char operator;
+     char ope;
      int x = 0;
      int y = 0;;
      int amount = 0;
@@ -32,12 +32,12 @@ int main(void)
      do
      { 
     printf("演算の種類を選んでください(+,-,*,/,^)\n");
-    scanf(" %c",&operator);
+    scanf(" %c",&ope);
 
     printf("2つの整数を入力してください\n");
     scanf("%d %d",&x,&y);
         
-      switch(operator)
+      switch(ope)
      {
         case '+':
         printf("加算を行います\n");
