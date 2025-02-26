@@ -11,18 +11,20 @@
  * 2025/02/18 Y.Oshima 変更: 機能追加
  * 2025/02/19 Y.Oshima 変更: 機能追加
  * 2025/02/23 Y.Oshima 変更: コード修正
+ * 2025/02/26 Y.Oshima 変更: 機能追加
  ************************************************************/
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 #define REMAIN_MAX 10
 
 int main(void)
 {
-     char ope;
+     char ope[10];
      int x = 0;
-     int y = 0;;
+     int y = 0;
      int amount = 0;
      int mod = 0;
      char trigger[10] = "";
@@ -31,13 +33,22 @@ int main(void)
 
      do
      { 
-    printf("演算の種類を選んでください(+,-,*,/,^)\n");
-    scanf(" %c",&ope);
-
+    printf("演算の種類を選んでください(+,-,*,/,^,abs)\n");
+    scanf(" %s",ope);
+    
+    if(strcmp(ope,"abs") == 0)
+    {
+        printf("整数を入力してください\n");
+        scanf("%d",&x);
+        amount = abs(x);
+        printf("%d\n",amount);
+    }
+    else
+    {
     printf("2つの整数を入力してください\n");
     scanf("%d %d",&x,&y);
         
-      switch(ope)
+      switch(ope[0])
      {
         case '+':
         printf("加算を行います\n");
@@ -82,6 +93,7 @@ int main(void)
         break;
 
      }
+    }
      if(i < REMAIN_MAX)
      {
          remain[i] = amount;
