@@ -33,7 +33,7 @@ int main(void)
 
      do
      { 
-    printf("演算の種類を選んでください(+,-,*,/,^,abs)\n");
+    printf("演算の種類を選んでください(+,-,*,/,^,abs,<<(>>))\n");
     scanf(" %s",ope);
     
     if(strcmp(ope,"abs") == 0)
@@ -42,6 +42,23 @@ int main(void)
         scanf("%d",&x);
         amount = abs(x);
         printf("%d\n",amount);
+    }
+    else if(strcmp(ope,">>") == 0 || strcmp(ope,"<<") == 0)
+    {
+        printf("2つの整数を入力してください (数値 シフト量)\n");
+        scanf("%d %d", &x, &y);
+        
+        if(strcmp(ope,">>") == 0)
+        {
+            printf("右シフトを行います\n");
+            amount = x >> y;
+        }
+        else
+        {
+            printf("左シフトを行います\n");
+            amount = x << y;
+        }
+        printf("%d\n", amount);
     }
     else
     {
