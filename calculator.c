@@ -13,6 +13,7 @@
  * 2025/02/23 Y.Oshima 変更: コード修正
  * 2025/02/26 Y.Oshima 変更: 機能追加
  * 2025/03/01 Y.Oshima 変更: 機能追加
+ * 2025/03/03 Y.Oshima 変更: 機能追加
  ************************************************************/
 #include <stdio.h>
 #include <string.h>
@@ -34,7 +35,7 @@ int main(void)
 
      do
      { 
-    printf("演算の種類を選んでください(+,-,*,/,^,abs,<<(>>))\n");
+    printf("演算の種類を選んでください(+,-,*,/,^,abs,<<,>>,&,|)\n");
     scanf(" %s",ope);
     
     if(strcmp(ope,"abs") == 0)
@@ -103,6 +104,18 @@ int main(void)
         case '^':
         printf("累乗計算を行います\n");
         amount = pow(x,y);
+        printf("%d\n",amount);
+        break;
+
+        case '&':
+        printf("AND演算を行います\n");
+        amount = x & y;
+        printf("%d\n",amount);
+        break;
+
+        case '|':
+        printf("OR演算を行います\n");
+        amount = x | y;
         printf("%d\n",amount);
         break;
 
