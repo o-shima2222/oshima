@@ -3,7 +3,8 @@
         "cmath": "c",
         "complex": "c",
         "bit": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "ios": "c"
     },
     
         "editor.fontFamily": "'美咲ゴシック第2 Code JP', monospace",
