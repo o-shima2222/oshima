@@ -14,7 +14,6 @@
  
  #define FIELD_WIDTH (10)
  #define FIELD_HEIGHT (15)
- 
  #define BLOCK_WIDTH_MAX (4)
  #define BLOCK_HEIGHT_MAX (4)
 
