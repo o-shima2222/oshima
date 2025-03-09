@@ -17,9 +17,7 @@ int main(void)
     {
         x = -x;
     }
-
     //x = (x < 0) ? -x : x; // 三項演算子を使ったコーディング
-
     printf("Absolute value: %d\n", x);
     return 0;
 }
