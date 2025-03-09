@@ -4,7 +4,8 @@
         "complex": "c",
         "bit": "c",
         "math.h": "c",
-        "ios": "c"
+        "ios": "c",
+        "stdio.h": "c"
     },
     
         "editor.fontFamily": "'美咲ゴシック第2 Code JP', monospace",
