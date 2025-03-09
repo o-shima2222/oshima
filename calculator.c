@@ -14,6 +14,7 @@
  * 2025/02/26 Y.Oshima 変更: 機能追加
  * 2025/03/01 Y.Oshima 変更: 機能追加
  * 2025/03/03 Y.Oshima 変更: 機能追加
+ * 2025/03/09 Y.Oshima 変更: 機能追加
  ************************************************************/
 #include <stdio.h>
 #include <string.h>
@@ -37,18 +38,17 @@ int main(void)
      { 
     printf("演算の種類を選んでください(+,-,*,/,^,abs,<<,>>,&,|)\n");
     scanf(" %s",ope);
-    
     if(strcmp(ope,"abs") == 0)
     {
-        printf("整数を入力してください\n");
-        scanf("%d",&x);
+        printf("整数を入力してください (10進数 or 16進数: 例 42, 0x2A)\n");
+        scanf("%i",&x); //10進数と16進数の入力を確認
         amount = abs(x);
-        printf("%d\n",amount);
+        printf("結果: 0x%x (%d)\n", amount, amount);
     }
     else if(strcmp(ope,">>") == 0 || strcmp(ope,"<<") == 0)
     {
-        printf("2つの整数を入力してください (数値 シフト量)\n");
-        scanf("%d %d", &x, &y);
+        printf("2つの数値を入力してください (10進数 or 16進数, シフト量)\n");
+        scanf("%i %i", &x, &y);
         
         if(strcmp(ope,">>") == 0)
         {
@@ -60,63 +60,54 @@ int main(void)
             printf("左シフトを行います\n");
             amount = x << y;
         }
-        printf("%d\n", amount);
+        printf("結果: 0x%x (%d)\n", amount, amount);
     }
     else
     {
-    printf("2つの整数を入力してください\n");
-    scanf("%d %d",&x,&y);
-        
+    printf("2つの数値を入力してください (10進数 or 16進数: 例 42, 0x2A)\n");
+    scanf("%i %i", &x, &y);
       switch(ope[0])
      {
         case '+':
         printf("加算を行います\n");
         amount = x + y;
-        printf("%d\n",amount);
         break;
 
         case '-':
         printf("減算を行います\n");
         amount = x - y;
-        printf("%d\n",amount);
         break;
 
         case '*':
         printf("乗算を行います\n");
         amount = x * y;
-        printf("%d\n",amount);
         break;
 
         case '/':
         if(y == 0)
         {
             printf("除算は0で割ることができません\n");
+            break;
         }
-        else
-        {
         printf("除算を行います\n");
         amount = x / y;
         mod = x % y;
-        printf("%d 余り %d\n",amount,mod);
-        }
+        printf("結果: 0x%x (%d), 余り: 0x%x (%d)\n", amount, amount, mod, mod);
         break;
 
         case '^':
         printf("累乗計算を行います\n");
         amount = pow(x,y);
-        printf("%d\n",amount);
         break;
 
         case '&':
         printf("AND演算を行います\n");
         amount = x & y;
-        printf("%d\n",amount);
         break;
 
         case '|':
         printf("OR演算を行います\n");
         amount = x | y;
-        printf("%d\n",amount);
         break;
 
         default:
@@ -124,7 +115,9 @@ int main(void)
         break;
 
      }
+        printf("結果: 0x%x (%d)\n", amount, amount);
     }
+    
      if(i < REMAIN_MAX)
      {
          remain[i] = amount;
