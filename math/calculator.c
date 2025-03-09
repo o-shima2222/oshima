@@ -66,6 +66,7 @@ int main(void)
     {
     printf("2つの数値を入力してください (10進数 or 16進数: 例 42, 0x2A)\n");
     scanf("%i %i", &x, &y);
+    
       switch(ope[0])
      {
         case '+':
