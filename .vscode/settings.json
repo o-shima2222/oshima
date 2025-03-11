@@ -5,7 +5,11 @@
         "bit": "c",
         "math.h": "c",
         "ios": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "limits": "c",
+        "ratio": "c",
+        "chrono": "c",
+        "algorithm": "c"
     },
     
         "editor.fontFamily": "'美咲ゴシック第2 Code JP', monospace",
