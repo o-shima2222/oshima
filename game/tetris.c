@@ -118,6 +118,7 @@ MINO mino;
 //ステージ作成
 void DrawScreen()
 {
+   system("clear");
    memcpy(screen,field,sizeof(field));
 
    for(int y = 0; y < mino.block.height; y++)
@@ -130,8 +131,6 @@ void DrawScreen()
            }
        }
    }
-
-   clear(); 
    
     // フィールド部分
     for(int y = 0; y < FIELD_HEIGHT; y++)
@@ -224,6 +223,7 @@ int main(void)
                break;
 
            }
+           
            DrawScreen();
         
         }
