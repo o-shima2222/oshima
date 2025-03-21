@@ -8,6 +8,8 @@
  * 2025.03.01 Y.Oshima 新規作成
  * 2025.03.02 Y.Oshima フィールドの表示を追加
  * 2025.03.04 Y.Oshima テトリミノの表示を追加
+ * 2025.03.16 Y.Oshima テトリミノの移動を追加
+ * 2025.03.21 Y.Oshima テトリミノとフィールドの衝突判定を追加
  ************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
@@ -115,6 +117,26 @@ int field[FIELD_HEIGHT][FIELD_WIDTH];
 int screen[FIELD_HEIGHT][FIELD_WIDTH];
 MINO mino;
 
+bool MinocheckCollision()
+{
+    for(int y = 0; y < mino.block.height; y++)
+   {
+       for(int x = 0; x < mino.block.width;x++)
+       {
+            if(mino.block.pattern[y][x])
+            {
+                if((mino.y + y < 0) || (mino.y + y >= FIELD_HEIGHT) || (mino.x + x < 0) || (mino.x + x >= FIELD_WIDTH))
+                {
+                    return true;
+                }
+            }
+            
+       }
+       
+   }
+   return false;
+}
+
 //ステージ作成
 void DrawScreen()
 {
@@ -135,20 +157,20 @@ void DrawScreen()
     // フィールド部分
     for(int y = 0; y < FIELD_HEIGHT; y++)
     {
-        printf("▢"); // 左の枠
+        printf("□"); // 左の枠
 
         for(int x = 0; x < FIELD_WIDTH; x++)
         {
-            printf("%s",screen[y][x] ? "▢" : " ");
+            printf("%s",screen[y][x] ? "■" : " ");
         }
 
-        printf("▢\r\n"); // 右の枠と改行
+        printf("□\r\n"); // 右の枠と改行
     }
 
     // 下の枠
     for(int x = 0; x < FIELD_WIDTH + 2; x++)
     {
-        printf("▢");
+        printf("□");
     }
     printf("\r\n");
     refresh();  // ncurses の画面更新
@@ -204,6 +226,7 @@ int main(void)
         
         if(kbhit())
         {
+            MINO lastMino = mino;
             switch(getchar())
            {
 
@@ -222,6 +245,11 @@ int main(void)
                mino.x++;
                break;
 
+           }
+
+           if(MinocheckCollision())
+           {
+                mino = lastMino;
            }
            
            DrawScreen();
