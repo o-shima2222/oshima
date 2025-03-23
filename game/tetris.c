@@ -20,11 +20,17 @@
 #include <unistd.h> 
 #include <termios.h>
 #include <fcntl.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #define FIELD_WIDTH (10)
 #define FIELD_HEIGHT (20)
+
 #define BLOCK_WIDTH_MAX (4)
 #define BLOCK_HEIGHT_MAX (4)
+
+#define FPS (0.5)
+#define INTERVAL (100000*1.5)
 
 enum{
    BLOCK_I,
@@ -129,6 +135,10 @@ bool MinocheckCollision()
                 {
                     return true;
                 }
+                if(field[mino.y + y][mino.x + x])
+                {
+                    return true;
+                }
             }
             
        }
@@ -217,13 +227,70 @@ int kbhit(void)
 
 int main(void)
 {
+    
     srand((unsigned int)time(NULL));
     init();
     
-    
+    clock_t lastClock = clock();
     while(1)
     {
-        
+        clock_t nowClock = clock();
+        if(nowClock >= lastClock + INTERVAL)
+        {
+            lastClock = nowClock;
+            MINO lastMino = mino;
+            mino.y++;
+            if(MinocheckCollision())
+            {
+                mino = lastMino;
+                for(int y = 0; y < mino.block.height; y++)
+                {
+                    for(int x = 0; x < mino.block.width;x++)
+                    {
+                        if(mino.block.pattern[y][x])
+                        {
+                            field[mino.y + y][mino.x + x] |= 1;
+                        }
+                    }
+
+                }
+                for(int y = 0; y < FIELD_HEIGHT;y++)
+                {
+                    bool completed = true;
+                    for(int x = 0; x < FIELD_WIDTH;x++)
+                    {
+                        if(field[y][x] == 0)
+                        {
+                            completed = false;
+                            break;
+                        }
+                    }
+                
+
+                        if(completed)
+                        {
+                        for(int x = 0; x < FIELD_WIDTH;x++)
+                        {
+                            {
+                                field[y][x] = 0;
+                            }
+                        }   
+                        for(int y2 =y; y2 >= 1;y2--)
+                            {
+                                for(int x = 0; x < FIELD_WIDTH;x++)
+                                {
+                                    field[y2][x] = field[y2 - 1][x];
+                                    field[y2 - 1][x] = 0;
+                                }
+                            }
+                        }
+                    
+                }
+                initMino();
+            }
+
+            DrawScreen();
+        }
         if(kbhit())
         {
             MINO lastMino = mino;
@@ -245,7 +312,21 @@ int main(void)
                mino.x++;
                break;
 
-           }
+               default:
+               {
+                MINO newMino = mino;
+                for(int y = 0; y < mino.block.height; y++)
+                {
+                    for(int x = 0; x < mino.block.width;x++)
+                    {
+                        newMino.block.pattern[mino.block.width - 1 - x][y] = mino.block.pattern[y][x];
+                    }
+                    
+                }
+                mino = newMino;
+               break;
+               }
+            }
 
            if(MinocheckCollision())
            {
