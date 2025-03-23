@@ -16,7 +16,7 @@
     "editor.fontFamily": "monospace",  // エディタ部分はデフォルトのモノスペースフォント
     "editor.fontSize": 14,
     
-    "terminal.integrated.fontFamily": "'美咲ゴシック', 'MisakiGothic', '美咲ゴシック第2', 'MisakiGothic2nd', '美咲明朝', 'MisakiMincho', monospace",  // ターミナル部分のみ美咲フォント
-    "terminal.integrated.fontSize": 30
+    "terminal.integrated.fontFamily": "monospace",  // ターミナル部分のみ美咲フォント
+    "terminal.integrated.fontSize": 20
     
 }
